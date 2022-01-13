@@ -1,5 +1,5 @@
-export const SNOWPACK_PUBLIC_GIT_SHA = "3efcd1ed04d4b3669f686f1529ea882e2cb8f333";
-export const SNOWPACK_PUBLIC_VERSION = "v0.0.3";
+export const SNOWPACK_PUBLIC_GIT_SHA = "e40ec46b12dddaa69b7eb11bd40ffedcf77de5b7";
+export const SNOWPACK_PUBLIC_VERSION = "v0.0.4";
 export const SNOWPACK_PUBLIC_URL = "/metamask";
 export const MODE = "development";
 export const NODE_ENV = "development";
