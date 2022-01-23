@@ -1,8 +1,6 @@
 import React from "../_snowpack/pkg/react.js";
 import Connect from "./connect.js";
 const {solana} = window;
-solana.on("connect", () => console.log("connected!"));
-console.log(solana.on);
 export default () => {
   if (!solana) {
     window.open("https://phantom.app/", "_blank");
