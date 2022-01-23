@@ -13,5 +13,7 @@ export default () => {
   if (!solana || !solana.isPhantom) {
     return /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("i", null, "solana is installed but phantom not, opening phantom.app"));
   }
+  solana.on("connect", () => console.log("connected!"));
+  solana.on("disconnect", () => console.log("disconnected!"));
   return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h1", null, "Phantom ", /* @__PURE__ */ React.createElement("small", null, "Solana")), /* @__PURE__ */ React.createElement(Connect, null));
 };

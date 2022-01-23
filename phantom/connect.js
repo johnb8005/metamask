@@ -2,8 +2,6 @@ import React from "../_snowpack/pkg/react.js";
 import Sign from "./sign.js";
 import {bnToUint8Array} from "./utils.js";
 const {solana} = window;
-solana.on("connect", () => console.log("connected!"));
-solana.on("disconnect", () => console.log("disconnected!"));
 const Connect = () => {
   const [solAddress, setSolAddress] = React.useState();
   const [loading, setLoading] = React.useState(false);
