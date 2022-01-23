@@ -1,6 +1,7 @@
 import React from "react";
 import { Solana } from "./type";
-import { verifySig } from "./utils";
+import { Copy } from "./ui-utils";
+import { uint8ArrayToHex, verifySig } from "./utils";
 
 const { solana } = window as any as { solana: Solana };
 
@@ -23,12 +24,29 @@ const Sign = ({ publicKey }: { publicKey: Uint8Array }) => {
   };
 
   if (signature) {
+    const hexSignature = uint8ArrayToHex(signature.signature);
     return (
       <>
-        <p>
-          Result <code>{String(signature.verify)}</code>
-        </p>
-        <code>{signature.signature.toLocaleString()}</code>
+        <ul>
+          <li>
+            Message signed <code>{message}</code>
+          </li>
+          <li>
+            Result <code>{String(signature.verify)}</code>
+          </li>
+          <li>
+            Signature: <code>{hexSignature}</code>
+            <br />
+            <Copy text={hexSignature} />
+          </li>
+        </ul>
+
+        <button
+          className="btn btn-secondary"
+          onClick={() => setSignature(undefined)}
+        >
+          Reset
+        </button>
       </>
     );
   }

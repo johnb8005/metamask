@@ -16,7 +16,8 @@
     //"isolatedModules": true,
     "outDir": "dist",
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "downlevelIteration":true
   },
   "include": ["./src/**/*"],
   "exclude": ["./src/**/*.test.ts"],
