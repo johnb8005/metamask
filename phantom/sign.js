@@ -1,5 +1,6 @@
 import React from "../_snowpack/pkg/react.js";
-import {verifySig} from "./utils.js";
+import {Copy} from "./ui-utils.js";
+import {uint8ArrayToHex, verifySig} from "./utils.js";
 const {solana} = window;
 const Sign = ({publicKey}) => {
   const [message, setMessage] = React.useState();
@@ -12,7 +13,13 @@ const Sign = ({publicKey}) => {
     setSignature({signature: signature2, verify});
   };
   if (signature) {
-    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("p", null, "Result ", /* @__PURE__ */ React.createElement("code", null, String(signature.verify))), /* @__PURE__ */ React.createElement("code", null, signature.signature.toLocaleString()));
+    const hexSignature = uint8ArrayToHex(signature.signature);
+    return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("ul", null, /* @__PURE__ */ React.createElement("li", null, "Message signed ", /* @__PURE__ */ React.createElement("code", null, message)), /* @__PURE__ */ React.createElement("li", null, "Result ", /* @__PURE__ */ React.createElement("code", null, String(signature.verify))), /* @__PURE__ */ React.createElement("li", null, "Signature: ", /* @__PURE__ */ React.createElement("code", null, hexSignature), /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement(Copy, {
+      text: hexSignature
+    }))), /* @__PURE__ */ React.createElement("button", {
+      className: "btn btn-secondary",
+      onClick: () => setSignature(void 0)
+    }, "Reset"));
   }
   return /* @__PURE__ */ React.createElement("div", {
     className: "row"
