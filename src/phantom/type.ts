@@ -1,5 +1,8 @@
+import BigNumber from "bn.js";
+
 export interface SolanaPublicKey {
   toString: () => string;
+  _bn: BigNumber;
 }
 type Actions = "connect" | "disconnect";
 
@@ -13,4 +16,8 @@ export interface Solana {
   on: any; //CallbackOneParam;
   connect: () => Promise<{ publicKey: SolanaPublicKey }>;
   disconnect: () => Promise<void>;
+  signMessage: (
+    message: Uint8Array,
+    encodingType: "utf8"
+  ) => Promise<{ signature: Uint8Array }>;
 }

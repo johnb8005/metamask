@@ -4,14 +4,18 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@types/bn.js": "^5.1.0",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@types/react-router": "^5.1.13",
     "@types/react-router-dom": "^5.1.7",
+    "bignumber.js": "^9.0.2",
+    "bn.js": "^5.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
-    "snowpack": "^3.2.2"
+    "snowpack": "^3.2.2",
+    "tweetnacl": "^1.0.3"
   },
   "scripts": {
     "start": "SNOWPACK_PUBLIC_URL= snowpack dev",

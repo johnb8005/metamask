@@ -7,10 +7,6 @@ import Connect from "./connect";
 // https://docs.phantom.app/integrating/detecting-the-provider
 const { solana } = window as any as { solana: Solana };
 
-solana.on("connect", () => console.log("connected!"));
-
-console.log(solana.on);
-
 export default () => {
   if (!solana) {
     window.open("https://phantom.app/", "_blank");
