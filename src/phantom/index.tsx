@@ -35,6 +35,9 @@ export default () => {
     );
   }
 
+  solana.on("connect", () => console.log("connected!"));
+  solana.on("disconnect", () => console.log("disconnected!"));
+
   return (
     <>
       <h1>

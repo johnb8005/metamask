@@ -9,9 +9,6 @@ import { bnToUint8Array } from "./utils";
 // https://docs.phantom.app/integrating/detecting-the-provider
 const { solana } = window as any as { solana: Solana };
 
-solana.on("connect", () => console.log("connected!"));
-solana.on("disconnect", () => console.log("disconnected!"));
-
 const Connect = () => {
   const [solAddress, setSolAddress] = React.useState<
     { s: string; u: Uint8Array } | undefined
