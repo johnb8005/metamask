@@ -42,6 +42,7 @@ export default () => {
 
       {!ethAddress && (
         <button
+          className="btn btn-primary"
           onClick={async () => {
             const r: string[] = await ethereum.request({
               method: "eth_requestAccounts",
