@@ -3,7 +3,6 @@ import {Route, Switch} from "./_snowpack/pkg/react-router-dom.js";
 import Home from "./home.js";
 import Phantom from "./phantom/index.js";
 import MetaMask from "./meta-mask/index.js";
-import Webauthn from "./webauthn/index.js";
 const NotFound = () => /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("i", null, "Page Not Found"));
 export default () => {
   return /* @__PURE__ */ React.createElement(Switch, null, /* @__PURE__ */ React.createElement(Route, {
@@ -18,10 +17,6 @@ export default () => {
     exact: true,
     path: "/metamask",
     component: MetaMask
-  }), /* @__PURE__ */ React.createElement(Route, {
-    exact: true,
-    path: "/webauthn",
-    component: Webauthn
   }), /* @__PURE__ */ React.createElement(Route, {
     component: NotFound
   }));
