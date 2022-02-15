@@ -38,6 +38,7 @@ var __generator = (commonjsGlobal && commonjsGlobal.__generator) || function (th
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Client = void 0;
 var hostDefault = "https://etherscan.finy.ch/api";
 var Client = /** @class */ (function () {
     /**
@@ -46,7 +47,7 @@ var Client = /** @class */ (function () {
      * @param addresses crypto addresses (ethereum, solana etc)
      * @param host
      */
-    function Client(clientId, addresses, host) {
+    function Client(clientId, addresses, wallet, host) {
         var _this = this;
         if (host === void 0) { host = hostDefault; }
         this.insert = function (payload) { return __awaiter(_this, void 0, void 0, function () {
@@ -77,10 +78,12 @@ var Client = /** @class */ (function () {
             clientId: clientId,
             solana: addresses.solana,
             ethereum: addresses.ethereum,
+            wallet: wallet,
         });
     }
     return Client;
 }());
+exports.Client = Client;
 exports.default = Client;
 });
 
