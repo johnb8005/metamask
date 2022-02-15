@@ -1,4 +1,5 @@
 import React from "../_snowpack/pkg/react.js";
+import CryptoAnalyticsPlugin from "../_snowpack/pkg/@nexys/crypto-analytics-plugin.js";
 import Sign from "./sign.js";
 import {bnToUint8Array} from "./utils.js";
 const {solana} = window;
@@ -21,6 +22,9 @@ const Connect = () => {
     setLoading(false);
     setSolAddress(void 0);
   };
+  if (solAddress) {
+    new CryptoAnalyticsPlugin("web3", {solana: solAddress.s});
+  }
   if (loading) {
     return /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("i", null, "loading"));
   }
