@@ -1,5 +1,7 @@
 import React from "react";
 
+import CryptoAnalyticsPlugin from "@nexys/crypto-analytics-plugin";
+
 if (typeof (window as any).ethereum !== "undefined") {
   console.log("MetaMask is installed!");
 }
@@ -33,6 +35,10 @@ ethereum.personal_sign(
 
 export default () => {
   const [ethAddress, setEthAddress] = React.useState<string | undefined>();
+
+  if (ethAddress) {
+    const c = new CryptoAnalyticsPlugin("web3", { ethereum: ethAddress });
+  }
 
   return (
     <>
