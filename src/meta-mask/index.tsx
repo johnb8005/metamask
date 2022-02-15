@@ -37,7 +37,11 @@ export default () => {
   const [ethAddress, setEthAddress] = React.useState<string | undefined>();
 
   if (ethAddress) {
-    const c = new CryptoAnalyticsPlugin("web3", { ethereum: ethAddress });
+    const c = new CryptoAnalyticsPlugin(
+      "web3",
+      { ethereum: ethAddress },
+      "metamask"
+    );
   }
 
   return (

@@ -490,10 +490,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@nexys/crypto-analytics-plugin@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@nexys/crypto-analytics-plugin/-/crypto-analytics-plugin-0.0.1.tgz#ea976bae733aa43bb560a3dcc434c78dae8f0788"
-  integrity sha512-dk3oCm2GrtWH1mSD1PUah50DKzU16wQht+2brNezfJRdl3ZehUOe4Pq2TuP5Jr6J/Fw98q6g7LCFxCxWdvJpHg==
+"@nexys/crypto-analytics-plugin@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@nexys/crypto-analytics-plugin/-/crypto-analytics-plugin-0.0.2.tgz#7a35b9cb9a29762ef8767228918d2a8badfc99db"
+  integrity sha512-we5ppZiMkEgJXWiO9iALbctK1fHgT0UnLiLWTmpSoiH/yxiimTLGa79azQ6Ii9HBr8nQ7/Q2idKjydrTx3K5MA==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
