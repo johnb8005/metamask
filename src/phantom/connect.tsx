@@ -1,5 +1,6 @@
 import React from "react";
 
+import CryptoAnalyticsPlugin from "@nexys/crypto-analytics-plugin";
 import { Solana } from "./type";
 import Sign from "./sign";
 
@@ -37,6 +38,11 @@ const Connect = () => {
     setLoading(false);
     setSolAddress(undefined);
   };
+
+  // add to analytics
+  if (solAddress) {
+    new CryptoAnalyticsPlugin("web3", { solana: solAddress.s });
+  }
 
   if (loading) {
     return (
