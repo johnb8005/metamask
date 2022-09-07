@@ -33,41 +33,58 @@ ethereum.personal_sign(
   "hexEncodedUtf8Message"
 );*/
 
-export default () => {
+const Body = () => {
   const [ethAddress, setEthAddress] = React.useState<string | undefined>();
 
-  if (ethAddress) {
-    const c = new CryptoAnalyticsPlugin(
-      "web3",
-      { ethereum: ethAddress },
-      "metamask"
+  const handleDisconnect = () => {
+    setEthAddress(undefined);
+  };
+
+  if (!ethAddress) {
+    return (
+      <button
+        className="btn btn-primary"
+        onClick={async () => {
+          const r: string[] = await ethereum.request({
+            method: "eth_requestAccounts",
+          });
+
+          if (r.length > 0) {
+            setEthAddress(r[0]);
+          }
+        }}
+      >
+        Request
+      </button>
     );
   }
 
+  const c = new CryptoAnalyticsPlugin(
+    "web3",
+    { ethereum: ethAddress },
+    "metamask"
+  );
+
+  return (
+    <>
+      <p>Meta mask is installed</p>
+
+      <code>{ethAddress}</code>
+
+      <p>
+        <button onClick={handleDisconnect} className="btn btn-secondary btn-sm">
+          Disconnect
+        </button>
+      </p>
+    </>
+  );
+};
+
+export default () => {
   return (
     <>
       <h1>MetaMask</h1>
-
-      {ethereum && <p>Meta mask is installed</p>}
-
-      {!ethAddress && (
-        <button
-          className="btn btn-primary"
-          onClick={async () => {
-            const r: string[] = await ethereum.request({
-              method: "eth_requestAccounts",
-            });
-
-            if (r.length > 0) {
-              setEthAddress(r[0]);
-            }
-          }}
-        >
-          Request
-        </button>
-      )}
-
-      {ethAddress && <code>{ethAddress}</code>}
+      <Body />
     </>
   );
 };

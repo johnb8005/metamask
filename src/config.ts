@@ -1,9 +1,13 @@
-export const version =
-  import.meta.env.SNOWPACK_PUBLIC_VERSION || "unset_version";
-export const sha = import.meta.env.SNOWPACK_PUBLIC_GIT_SHA || "unset_sha";
-export const title = import.meta.env.SNOWPACK_PUBLIC_TITLE || "Web3";
-export const basename = import.meta.env.SNOWPACK_PUBLIC_URL;
+export const title = "Web3";
 
 const ghUrl = "https://github.com/johnb8005/web3";
 
-export const github = { sha: `${ghUrl}/commit/${sha}`, url: ghUrl };
+export const version: string = import.meta.env.VITE_VERSION || "unset_version";
+export const sha: string = import.meta.env.VITE_GIT_SHA || "unset_sha";
+export const basename = import.meta.env.BASE_URL;
+
+export const github = {
+  sha: `${ghUrl}/commit/${sha}`,
+  version: `${ghUrl}/releases/tag/${version}`,
+  url: ghUrl,
+};
