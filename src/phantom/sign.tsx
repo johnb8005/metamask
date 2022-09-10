@@ -53,7 +53,7 @@ const Sign = ({ publicKey }: { publicKey: Uint8Array }) => {
 
   return (
     <div className="row">
-      <div className="col-md-3">
+      <div className="col-md-4">
         <form onSubmit={handleSubmit}>
           <div className="input-group ">
             <input

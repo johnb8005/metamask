@@ -7,9 +7,11 @@ import Connect from "./connect";
 // https://docs.phantom.app/integrating/detecting-the-provider
 const { solana } = window as any as { solana: Solana };
 
+const phantomUrl = "https://phantom.app/";
+
 export default () => {
   if (!solana) {
-    window.open("https://phantom.app/", "_blank");
+    window.open(phantomUrl, "_blank");
     return (
       <p>
         <i>solana is not detected, opening to phantom.app</i>
@@ -18,7 +20,7 @@ export default () => {
   }
 
   if (!solana.isPhantom) {
-    window.open("https://phantom.app/", "_blank");
+    window.open(phantomUrl, "_blank");
 
     return (
       <p>

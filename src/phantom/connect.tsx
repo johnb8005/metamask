@@ -3,6 +3,7 @@ import React from "react";
 import CryptoAnalyticsPlugin from "@nexys/crypto-analytics-plugin";
 import { Solana } from "./type";
 import Sign from "./sign";
+import Transaction from "./transaction";
 
 import { bnToUint8Array } from "./utils";
 
@@ -20,7 +21,7 @@ const Connect = () => {
   const handleConnect = async () => {
     setLoading(true);
 
-    const resp = await solana.connect();
+    const resp = await solana.connect({ onlyIfTrusted: true });
 
     setLoading(false);
 
@@ -67,6 +68,8 @@ const Connect = () => {
           </p>
           <h3>Signature</h3>
           <Sign publicKey={solAddress.u} />
+          <h3>Transaction</h3>
+          <Transaction publicKey={solAddress.u} />
           <hr />
           <button className="btn btn-secondary" onClick={handleDisconnect}>
             Disconnect
