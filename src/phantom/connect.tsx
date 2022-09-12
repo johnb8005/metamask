@@ -5,7 +5,7 @@ import { Solana } from "./type";
 import Sign from "./sign";
 import Transaction from "./transaction";
 
-import { bnToUint8Array } from "./utils";
+import { bnToUint8Array } from "./sign/utils";
 
 // detecting the provider
 // https://docs.phantom.app/integrating/detecting-the-provider

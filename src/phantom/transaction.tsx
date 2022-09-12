@@ -1,97 +1,31 @@
 import React from "react";
 import { PhantomProvider } from "./type";
-import { Copy } from "./ui-utils";
-import { uint8ArrayToHex, verifySig } from "./utils";
+import { getTransaction, getTransfer, tokens, toPubkey } from "./utils";
 
 import * as solanaWeb3 from "@solana/web3.js";
-import * as SPLToken from "@solana/spl-token";
 
 const { solana } = window as any as { solana: PhantomProvider };
 
-const Sign = ({ publicKey }: { publicKey: Uint8Array }) => {
+const Transaction = ({ publicKey }: { publicKey: Uint8Array }) => {
   const [amount, setAmount] = React.useState<number | undefined>();
-  const [signature, setSignature] = React.useState<
-    { signature: Uint8Array; verify: boolean } | undefined
-  >();
+  const [state, setState] = React.useState<number>(0);
 
+  const [token, setToken] = React.useState<string | undefined>();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!amount) {
+      throw Error("amount must be defined");
+    }
 
-    // sign message
-    const encodedMessage = new TextEncoder().encode("");
-
-    const connection = new solanaWeb3.Connection(
-      "https://api.mainnet-beta.solana.com",
-      "confirmed"
-    );
-
-    console.log(connection);
-
-    const toPubkey = new solanaWeb3.PublicKey(
-      "BTQJ9ZTaYLaBJNY1M9GA2YFmiFiJ7cR4Rjc4EXucjZA4"
-    );
     const fromPubkey = new solanaWeb3.PublicKey(publicKey);
+    const transfer = await getTransfer(fromPubkey, toPubkey, amount, token);
+    const transaction = await getTransaction(transfer, fromPubkey);
 
-    const lamports = solanaWeb3.LAMPORTS_PER_SOL / 100;
-
-    const transfer = solanaWeb3.SystemProgram.transfer({
-      fromPubkey,
-      toPubkey,
-      lamports,
-    });
-
-    const transfer2 = SPLToken.createTransferInstruction(
-      fromPubkey,
-      toPubkey,
-      fromPubkey,
-      1,
-      undefined,
-      SPLToken.TOKEN_PROGRAM_ID
-    );
-
-    console.log(solana);
-
-    const transaction = new solanaWeb3.Transaction().add(transfer);
-    //  .add(transfer2);
-
-    transaction.recentBlockhash = (
-      await connection.getLatestBlockhash("finalized")
-    ).blockhash;
-    transaction.feePayer = fromPubkey;
-
-    const { signature } = await solana.signAndSendTransaction(transaction);
-
-    //const verify = verifySig(encodedMessage, signature, publicKey);
-
-    // setSignature({ signature, verify });
+    solana.signAndSendTransaction(transaction);
   };
 
-  if (signature) {
-    const hexSignature = uint8ArrayToHex(signature.signature);
-    return (
-      <>
-        <ul>
-          <li>
-            Message signed <code>{amount}</code>
-          </li>
-          <li>
-            Result <code>{String(signature.verify)}</code>
-          </li>
-          <li>
-            Signature: <code>{hexSignature}</code>
-            <br />
-            <Copy text={hexSignature} />
-          </li>
-        </ul>
-
-        <button
-          className="btn btn-secondary"
-          onClick={() => setSignature(undefined)}
-        >
-          Reset
-        </button>
-      </>
-    );
+  if (state === 1) {
+    return <p>Success</p>;
   }
 
   return (
@@ -99,6 +33,26 @@ const Sign = ({ publicKey }: { publicKey: Uint8Array }) => {
       <div className="col-md-4">
         <form onSubmit={handleSubmit}>
           <div className="input-group ">
+            <div className="input-group-prepend">
+              <select
+                onChange={(v) => {
+                  const { value } = v.target;
+                  console.log(value);
+                  if (value === "SOL") {
+                    setToken(undefined);
+                    return;
+                  }
+
+                  setToken(value);
+                }}
+                className="form-control"
+                placeholder="amount to be sent"
+              >
+                <option value={undefined}>SOL</option>
+                <option value={tokens.usdc}>USDC</option>
+                <option value={tokens.usdt}>USDT</option>
+              </select>
+            </div>
             <input
               type={"number"}
               value={amount || ""}
@@ -128,4 +82,4 @@ const Sign = ({ publicKey }: { publicKey: Uint8Array }) => {
   );
 };
 
-export default Sign;
+export default Transaction;

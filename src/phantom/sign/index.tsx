@@ -1,6 +1,6 @@
 import React from "react";
-import { Solana } from "./type";
-import { Copy } from "./ui-utils";
+import { Solana } from "../type";
+import { Copy } from "../ui-utils";
 import { uint8ArrayToHex, verifySig } from "./utils";
 
 const { solana } = window as any as { solana: Solana };
